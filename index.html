@@ -14,11 +14,14 @@
             --bg-surface: rgba(20, 20, 20, 0.6); 
             --bg-surface-hover: rgba(35, 35, 35, 0.8);
             --neon-accent: #d4af37; 
+            --neon-success: #00ff88;
+            --neon-danger: #ff3366;
             --text-primary: #ffffff;
             --text-secondary: #a0a0a0;
             --border-glow: rgba(212, 175, 55, 0.3);
             --border-subtle: rgba(255, 255, 255, 0.05);
             --blur-fx: blur(16px);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
@@ -31,313 +34,196 @@
                               radial-gradient(circle at 85% 30%, rgba(30, 25, 10, 0.5), transparent 25%);
         }
 
+        /* Scrollbar personalizado */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-base); }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--neon-accent); }
+
         /* ==========================================================================
-           2. TICKER FINANCIERO (ESTILO TRADING / APEX LEVIATHAN)
+           2. TICKER FINANCIERO Y HEADER
            ========================================================================== */
         .financial-ticker {
-            background: #000;
-            color: var(--text-secondary);
-            font-size: 11px;
-            font-family: 'Courier New', monospace;
-            padding: 8px 0;
-            border-bottom: 1px solid var(--border-subtle);
-            overflow: hidden;
-            white-space: nowrap;
-            position: relative;
+            background: #000; color: var(--text-secondary); font-size: 11px;
+            font-family: 'Courier New', monospace; padding: 8px 0;
+            border-bottom: 1px solid var(--border-subtle); overflow: hidden;
+            white-space: nowrap; position: relative;
         }
 
-        .ticker-content {
-            display: inline-block;
-            animation: ticker 25s linear infinite;
-        }
-
-        @keyframes ticker {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-
+        .ticker-content { display: inline-block; animation: ticker 30s linear infinite; }
+        @keyframes ticker { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
         .ticker-item { margin-right: 40px; }
-        .ticker-up { color: #00ff88; }
+        .ticker-up { color: var(--neon-success); font-weight: bold; }
         .ticker-crypto { color: #f7931a; }
 
-        /* ==========================================================================
-           3. NAVEGACIÓN GLASSMORPHISM
-           ========================================================================== */
         header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: var(--bg-surface);
-            backdrop-filter: var(--blur-fx);
+            position: sticky; top: 0; z-index: 1000;
+            background: var(--bg-surface); backdrop-filter: var(--blur-fx);
             -webkit-backdrop-filter: var(--blur-fx);
             border-bottom: 1px solid var(--border-subtle);
-            padding: 20px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s ease;
+            padding: 20px 5%; display: flex; justify-content: space-between; align-items: center;
+            transition: var(--transition);
         }
 
         .brand {
-            font-size: 28px;
-            font-weight: 900;
-            letter-spacing: -1px;
-            color: var(--text-primary);
-            text-transform: uppercase;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-size: 28px; font-weight: 900; letter-spacing: -1px;
+            color: var(--text-primary); text-transform: uppercase; text-decoration: none;
+            display: flex; align-items: center; gap: 10px;
         }
-
         .brand span { color: var(--neon-accent); }
 
-        .search-engine {
-            flex-grow: 1;
-            max-width: 500px;
-            margin: 0 40px;
-            position: relative;
-        }
-
+        .search-engine { flex-grow: 1; max-width: 500px; margin: 0 40px; position: relative; }
         .search-engine input {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border-subtle);
-            padding: 15px 20px 15px 50px;
-            border-radius: 30px;
-            color: white;
-            font-size: 14px;
-            transition: all 0.3s ease;
+            width: 100%; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle);
+            padding: 12px 20px 12px 50px; border-radius: 30px; color: white; font-size: 14px;
+            transition: var(--transition);
         }
-
         .search-engine input:focus {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--neon-accent);
-            box-shadow: 0 0 15px var(--border-glow);
-            outline: none;
+            background: rgba(255, 255, 255, 0.08); border-color: var(--neon-accent);
+            box-shadow: 0 0 15px var(--border-glow); outline: none;
         }
-
-        .search-engine i {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-secondary);
-        }
+        .search-engine i { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--text-secondary); }
 
         .nav-actions button {
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 20px;
-            margin-left: 25px;
-            cursor: pointer;
-            transition: color 0.3s;
-            position: relative;
+            background: none; border: none; color: var(--text-primary);
+            font-size: 20px; margin-left: 25px; cursor: pointer; transition: var(--transition); position: relative;
         }
-
-        .nav-actions button:hover { color: var(--neon-accent); }
-
+        .nav-actions button:hover { color: var(--neon-accent); transform: scale(1.1); }
         .cart-badge {
-            position: absolute;
-            top: -5px;
-            right: -10px;
-            background: var(--neon-accent);
-            color: #000;
-            font-size: 10px;
-            font-weight: bold;
-            padding: 2px 6px;
-            border-radius: 10px;
+            position: absolute; top: -5px; right: -10px; background: var(--neon-accent); color: #000;
+            font-size: 10px; font-weight: bold; padding: 2px 6px; border-radius: 10px;
         }
 
         /* ==========================================================================
-           4. HERO SECTION (IMPACTO VISUAL)
+           3. HERO Y CATÁLOGO
            ========================================================================== */
         .hero {
-            height: 60vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            border-bottom: 1px solid var(--border-subtle);
+            height: 50vh; display: flex; flex-direction: column; justify-content: center;
+            align-items: center; text-align: center; border-bottom: 1px solid var(--border-subtle);
         }
-
         .hero h1 {
-            font-size: 64px;
-            font-weight: 900;
-            letter-spacing: -2px;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, #fff 0%, #666 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 4rem; font-weight: 900; letter-spacing: -2px; margin-bottom: 15px;
+            background: linear-gradient(135deg, #fff 0%, #666 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
+        .hero p { font-size: 1.1rem; color: var(--text-secondary); max-width: 600px; line-height: 1.6; }
 
-        .hero p {
-            font-size: 18px;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin-bottom: 40px;
-            line-height: 1.6;
-        }
+        .container { max-width: 1600px; margin: 60px auto; padding: 0 5%; min-height: 50vh; }
+        .section-header { margin-bottom: 40px; border-bottom: 1px solid #222; padding-bottom: 15px; }
+        .section-title { font-size: 24px; font-weight: 300; letter-spacing: 2px; text-transform: uppercase; }
 
-        /* ==========================================================================
-           5. CATÁLOGO ASIMÉTRICO (GRID AVANZADO)
-           ========================================================================== */
-        .container {
-            max-width: 1600px;
-            margin: 80px auto;
-            padding: 0 5%;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-        }
-
-        .section-title {
-            font-size: 28px;
-            font-weight: 300;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
         .product-card {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-subtle);
-            border-radius: 16px;
-            padding: 30px;
-            backdrop-filter: var(--blur-fx);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(30px);
+            background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 16px;
+            padding: 25px; backdrop-filter: var(--blur-fx); transition: var(--transition);
+            position: relative; overflow: hidden; opacity: 0; transform: translateY(30px);
+            display: flex; flex-direction: column;
         }
+        .product-card.visible { opacity: 1; transform: translateY(0); }
+        .product-card:hover { border-color: var(--border-glow); transform: translateY(-10px); box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
 
-        .product-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .product-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 50%; height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.05), transparent);
-            transform: skewX(-25deg);
-            transition: 0.7s;
-        }
-
-        .product-card:hover {
-            border-color: var(--border-glow);
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-        }
-
-        .product-card:hover::before { left: 150%; }
-
-        .product-img-wrapper {
-            height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
-        }
-
+        .product-img-wrapper { height: 180px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5)); }
         .product-tag {
-            position: absolute;
-            top: 20px; left: 20px;
-            background: var(--text-primary);
-            color: #000;
-            font-size: 10px;
-            font-weight: 800;
-            padding: 4px 10px;
-            border-radius: 20px;
-            text-transform: uppercase;
+            position: absolute; top: 15px; left: 15px; background: var(--text-primary); color: #000;
+            font-size: 9px; font-weight: 900; padding: 4px 10px; border-radius: 20px; text-transform: uppercase;
         }
-
-        .product-title {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 10px;
-            line-height: 1.4;
-        }
-
-        .product-price-usd {
-            font-size: 28px;
-            font-weight: 900;
-            color: var(--neon-accent);
-        }
-
-        .product-price-bs {
-            font-size: 12px;
-            color: var(--text-secondary);
-            margin-bottom: 25px;
-            font-family: 'Courier New', Courier, monospace;
-        }
+        .product-title { font-size: 15px; font-weight: 600; margin-bottom: auto; line-height: 1.4; min-height: 42px; }
+        .price-container { margin: 15px 0; }
+        .product-price-usd { font-size: 24px; font-weight: 900; color: var(--neon-accent); }
+        .product-price-bs { font-size: 12px; color: var(--text-secondary); font-family: 'Courier New', Courier, monospace; }
 
         .btn-premium {
-            width: 100%;
-            background: transparent;
-            color: var(--text-primary);
-            border: 1px solid var(--text-primary);
-            padding: 15px;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
+            width: 100%; background: transparent; color: var(--text-primary); border: 1px solid var(--text-primary);
+            padding: 12px; border-radius: 8px; font-size: 12px; font-weight: 800; text-transform: uppercase;
+            letter-spacing: 1px; cursor: pointer; transition: var(--transition); position: relative; overflow: hidden; z-index: 1;
         }
-
-        .btn-premium::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0;
-            width: 100%; height: 0%;
-            background: var(--text-primary);
-            transition: all 0.3s;
-            z-index: -1;
-        }
-
+        .btn-premium::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 0%; background: var(--text-primary); transition: var(--transition); z-index: -1; }
         .btn-premium:hover::after { height: 100%; }
         .btn-premium:hover { color: #000; }
 
         /* ==========================================================================
-           6. FOOTER Y DETALLES CORPORATIVOS
+           4. CHECKOUT MODAL Y FORMULARIOS
            ========================================================================== */
-        footer {
-            border-top: 1px solid var(--border-subtle);
-            padding: 60px 5% 30px;
-            margin-top: 100px;
-            background: rgba(10, 10, 10, 0.8);
+        .modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); z-index: 9999; justify-content: center; align-items: center;
+            backdrop-filter: blur(8px); opacity: 0; transition: opacity 0.3s ease;
         }
+        .modal-overlay.active { opacity: 1; display: flex; }
+        .checkout-box {
+            background: #0a0a0a; border: 1px solid var(--neon-accent); border-radius: 12px;
+            width: 95%; max-width: 800px; max-height: 90vh; overflow-y: auto; padding: 30px;
+            color: #fff; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; position: relative;
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.1);
+        }
+        @media (max-width: 768px) { .checkout-box { grid-template-columns: 1fr; } }
+        
+        .checkout-header { grid-column: 1 / -1; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;}
+        .checkout-header h2 { color: var(--neon-accent); font-size: 20px; }
+        .close-modal { background: none; border: none; color: #fff; font-size: 24px; cursor: pointer; }
 
-        .footer-content { text-align: center; color: var(--text-secondary); font-size: 14px; }
+        .cart-list { max-height: 250px; overflow-y: auto; border: 1px solid #222; border-radius: 8px; padding: 10px; background: #111; margin-bottom: 15px; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; padding: 10px 0; }
+        .cart-item:last-child { border-bottom: none; }
+        .item-controls { display: flex; align-items: center; gap: 10px; }
+        .qty-btn { background: #333; color: #fff; border: none; width: 25px; height: 25px; border-radius: 4px; cursor: pointer; }
+        .qty-btn:hover { background: var(--neon-accent); color: #000; }
+
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 12px; color: var(--text-secondary); margin-bottom: 5px; text-transform: uppercase; }
+        .form-input {
+            width: 100%; background: #111; border: 1px solid #333; padding: 12px;
+            border-radius: 6px; color: #fff; font-size: 14px; transition: var(--transition);
+        }
+        .form-input:focus { border-color: var(--neon-accent); outline: none; }
+
+        .totals-box { background: #000; padding: 20px; border-radius: 8px; border: 1px solid #333; margin-top: auto; }
+        .totals-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 14px; }
+        .grand-total { border-top: 1px dashed #444; padding-top: 10px; margin-top: 10px; font-size: 18px; font-weight: bold; color: var(--neon-accent); }
+
+        .btn-pay {
+            width: 100%; padding: 15px; border: none; border-radius: 6px; font-weight: 800;
+            text-transform: uppercase; cursor: pointer; transition: var(--transition); margin-top: 10px; display: flex; justify-content: center; align-items: center; gap: 10px;
+        }
+        .btn-bs { background: #fff; color: #000; }
+        .btn-bs:hover { background: #ddd; }
+        .btn-crypto { background: var(--neon-accent); color: #000; }
+        .btn-crypto:hover { box-shadow: 0 0 15px var(--border-glow); }
+
+        /* ==========================================================================
+           5. SISTEMA DE TOASTS (NOTIFICACIONES)
+           ========================================================================== */
+        #toast-container { position: fixed; bottom: 30px; right: 30px; z-index: 10000; display: flex; flex-direction: column; gap: 10px; }
+        .toast {
+            background: #111; border-left: 4px solid var(--neon-accent); color: #fff; padding: 15px 20px;
+            border-radius: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); font-size: 13px; font-weight: 600;
+            display: flex; align-items: center; gap: 12px; transform: translateX(120%);
+            animation: slideInRight 0.4s forwards, fadeOut 0.4s 3.5s forwards;
+        }
+        .toast i { font-size: 18px; }
+        .toast.success { border-color: var(--neon-success); }
+        .toast.success i { color: var(--neon-success); }
+        .toast.error { border-color: var(--neon-danger); }
+        .toast.error i { color: var(--neon-danger); }
+        
+        @keyframes slideInRight { to { transform: translateX(0); } }
+        @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
+
+        /* ==========================================================================
+           6. FOOTER Y LOADER
+           ========================================================================== */
+        footer { border-top: 1px solid var(--border-subtle); padding: 50px 5% 20px; background: #050505; text-align: center; }
+        .footer-content p { color: var(--text-secondary); font-size: 13px; margin-bottom: 5px;}
         .footer-content span { color: var(--text-primary); font-weight: bold; }
+        
+        .loader-skeleton { background: linear-gradient(90deg, #111 25%, #222 50%, #111 75%); background-size: 200% 100%; animation: loading 1.5s infinite; border-radius: 4px; }
+        @keyframes loading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
     </style>
 </head>
 <body>
 
     <div class="financial-ticker">
         <div class="ticker-content" id="bcv-ticker">
-            <span class="ticker-item">SISTEMA INICIANDO... CALIBRANDO TASAS</span>
+            <span class="ticker-item">INICIANDO ENLACE CON BCV... <i class="fas fa-satellite-dish fa-spin"></i></span>
         </div>
     </div>
 
@@ -345,10 +231,10 @@
         <a href="#" class="brand">VExpress<span>.</span></a>
         <div class="search-engine">
             <i class="fas fa-search"></i>
-            <input type="text" id="search-input" placeholder="Buscar hardware, sóftbol, tecnología...">
+            <input type="text" id="search-input" placeholder="Buscar tecnología, hardware, implementos Brickell...">
         </div>
         <div class="nav-actions">
-            <button><i class="far fa-user"></i></button>
+            <button onclick="showToast('Área de cliente en desarrollo', 'info')"><i class="far fa-user"></i></button>
             <button id="cart-trigger-btn">
                 <i class="fas fa-shopping-bag"></i>
                 <span class="cart-badge" id="cart-counter">0</span>
@@ -357,114 +243,197 @@
     </header>
 
     <section class="hero">
-        <h1>El mundo en tus manos.</h1>
-        <p>Logística internacional implacable. Desde las bóvedas en Estados Unidos y China directamente para combatir el frío de Pueblo Llano en Venezuela.</p>
+        <h1>Conectando realidades.</h1>
+        <p>El puente logístico definitivo. Desde los proveedores globales en USA/China directamente hacia tus manos en Pueblo Llano, Venezuela.</p>
     </section>
 
     <main class="container">
         <div class="section-header">
-            <h2 class="section-title">Terminal de Compras</h2>
+            <h2 class="section-title">Terminal de Adquisición</h2>
         </div>
-        
         <div class="product-grid" id="catalog-container">
-            </div>
+            <div class="product-card"><div class="product-img-wrapper loader-skeleton"></div><div class="loader-skeleton" style="height:20px; margin-bottom:10px;"></div><div class="loader-skeleton" style="height:30px; width:50%;"></div></div>
+            <div class="product-card"><div class="product-img-wrapper loader-skeleton"></div><div class="loader-skeleton" style="height:20px; margin-bottom:10px;"></div><div class="loader-skeleton" style="height:30px; width:50%;"></div></div>
+            <div class="product-card"><div class="product-img-wrapper loader-skeleton"></div><div class="loader-skeleton" style="height:20px; margin-bottom:10px;"></div><div class="loader-skeleton" style="height:30px; width:50%;"></div></div>
+        </div>
     </main>
 
     <footer>
         <div class="footer-content">
-            <p>Hecho en Venezuela. Infraestructura diseñada por <span>VISSIONARY GROUP</span></p>
-            <p style="font-size: 11px; margin-top: 10px; color: #555;">Integración de pagos impulsada por tecnología Apex Leviathan.</p>
+            <p>Operaciones Nacionales gestionadas en Pueblo Llano, Mérida - Venezuela.</p>
+            <p>Arquitectura corporativa diseñada por <span>VISSIONARY GROUP</span> &copy; 2026</p>
+            <p style="font-size: 11px; margin-top: 15px; color: #444;">Plataforma de conversión impulsada por ecosistema Apex Leviathan.</p>
         </div>
     </footer>
 
-    </body>
-</html>
-<script>
+    <div class="modal-overlay" id="checkout-modal">
+        <div class="checkout-box">
+            <div class="checkout-header">
+                <h2><i class="fas fa-shield-alt"></i> BÓVEDA DE PAGO SEGURA</h2>
+                <button class="close-modal" id="close-modal-btn"><i class="fas fa-times"></i></button>
+            </div>
+
+            <div class="checkout-left">
+                <div class="form-group">
+                    <label>Nombre Completo</label>
+                    <input type="text" id="c-name" class="form-input" placeholder="Ej. Juan Pérez" required>
+                </div>
+                <div class="form-group">
+                    <label>Cédula de Identidad / RIF</label>
+                    <input type="text" id="c-id" class="form-input" placeholder="V-12345678" required>
+                </div>
+                <div class="form-group">
+                    <label>Teléfono (WhatsApp)</label>
+                    <input type="text" id="c-phone" class="form-input" placeholder="0412 1234567" required>
+                </div>
+                <div class="form-group">
+                    <label>Dirección de Recepción</label>
+                    <textarea id="c-address" class="form-input" rows="2" required>Pueblo Llano, Edo. Mérida. (Especificar sector...)</textarea>
+                </div>
+                <div class="form-group" style="display: flex; gap: 10px;">
+                    <div style="flex:1;">
+                        <label>Vía Logística</label>
+                        <select id="shipping-method" class="form-input">
+                            <option value="aereo">Aéreo Express (Rápido)</option>
+                            <option value="maritimo">Marítimo (Económico)</option>
+                        </select>
+                    </div>
+                    <div style="flex:1;">
+                        <label>Courier Nacional</label>
+                        <select id="courier-method" class="form-input">
+                            <option value="MRW">MRW</option>
+                            <option value="Tealca">Tealca</option>
+                            <option value="Zoom">Grupo Zoom</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="checkout-right" style="display: flex; flex-direction: column;">
+                <label style="font-size: 12px; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase;">Manifiesto de Carga</label>
+                <div class="cart-list" id="cart-items-list">
+                    </div>
+
+                <div class="totals-box">
+                    <div class="totals-row"><span>Subtotal Equipos:</span> <span id="modal-subtotal">$0.00</span></div>
+                    <div class="totals-row" style="color:#888; font-size:11px;"><span>*Envío internacional se calcula según peso exacto al llegar a casillero.</span></div>
+                    <div class="totals-row grand-total">
+                        <span>TOTAL REFERENCIAL:</span>
+                        <div style="text-align: right;">
+                            <span id="modal-total-usd">$0.00</span><br>
+                            <span id="modal-total-bs" style="font-size:14px; color:var(--text-secondary); font-family: monospace;">0.00 Bs</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 15px;">
+                    <button class="btn-pay btn-bs" onclick="processWhatsAppOrder('Pago Móvil / Transferencia VES')">
+                        <i class="fas fa-exchange-alt"></i> Pagar en Bolívares (BCV)
+                    </button>
+                    <button class="btn-pay btn-crypto" onclick="processWhatsAppOrder('USDT / Cripto (Apex)')">
+                        <i class="fab fa-bitcoin"></i> Pagar con USDT / Binance
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container"></div>
+
+    <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-            // 1. ESTADO GLOBAL DE LA PLATAFORMA
-            const rates = { bcv: 36.45, usdt: 1.00, btc: 64230.50 };
-            let cart = [];
-            
-            // Ticker Financiero Superior
-            document.getElementById('bcv-ticker').innerHTML = `
-                <span class="ticker-item">TASA OFICIAL BCV: <span class="ticker-up">${rates.bcv} VES/USD</span></span>
-                <span class="ticker-item ticker-crypto"><i class="fab fa-bitcoin"></i> BTC: $${rates.btc.toLocaleString()}</span>
-                <span class="ticker-item">APEX LEVIATHAN NODE: <span class="ticker-up">ONLINE</span></span>
-                <span class="ticker-item">RUTAS ACTIVAS: MIAMI -> VENEZUELA</span>
-            `;
+            // --- ESTADO GLOBAL ---
+            const state = {
+                bcvRate: 0,
+                usdtRate: 0,
+                btcRate: 64230.50, // Referencial fijo para el ticker
+                cart: [],
+                phoneOwner: "584120000000" // PON TU NÚMERO DE WHATSAPP AQUÍ PARA RECIBIR PEDIDOS
+            };
 
-            // 2. BASE DE DATOS DEL INVENTARIO PREMIUM
+            // --- BASE DE DATOS PREMIUM ---
             const products = [
                 { id: 'VEX-001', tag: 'Setup Trading', name: 'Acer Nitro V15 - RTX 4050, Core i5, 16GB', price: 799.00, img: 'https://cdn-icons-png.flaticon.com/512/3089/3089840.png' },
                 { id: 'VEX-002', tag: 'Hardware', name: 'Monitor 34" Ultra-Wide (21:9) - 144Hz', price: 349.00, img: 'https://cdn-icons-png.flaticon.com/512/3594/3594073.png' },
                 { id: 'VEX-003', tag: 'Draft Brickell', name: 'Guante Rawlings PRO PREFERRED', price: 350.00, img: 'https://cdn-icons-png.flaticon.com/512/889/889455.png' },
-                { id: 'VEX-004', tag: 'Draft Brickell', name: 'Bate Easton S500 - Aleación Pura', price: 85.00, img: 'https://cdn-icons-png.flaticon.com/512/3358/3358052.png' }
+                { id: 'VEX-004', tag: 'Draft Brickell', name: 'Bate Easton S500 - Aleación Pura', price: 85.00, img: 'https://cdn-icons-png.flaticon.com/512/3358/3358052.png' },
+                { id: 'VEX-005', tag: 'Mobile', name: 'iPhone 15 Pro - 256GB Titanium', price: 1099.00, img: 'https://cdn-icons-png.flaticon.com/512/0/191.png' },
+                { id: 'VEX-006', tag: 'Divinée Ops', name: 'Punto de Venta Smart / Kiosko', price: 210.00, img: 'https://cdn-icons-png.flaticon.com/512/10100/10100062.png' }
             ];
 
-            // 3. INYECCIÓN DEL MODAL DE CHECKOUT EN EL HTML
-            const checkoutHTML = `
-                <div id="checkout-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; justify-content:center; align-items:center; backdrop-filter:blur(10px);">
-                    <div style="background:#111; border:1px solid var(--neon-accent); border-radius:12px; width:90%; max-width:600px; padding:30px; color:#fff;">
-                        <h2 style="border-bottom:1px solid #333; padding-bottom:15px; margin-bottom:20px; color:var(--neon-accent);">TERMINAL DE COMPRA</h2>
-                        
-                        <div id="cart-items-list" style="max-height:200px; overflow-y:auto; margin-bottom:20px; font-size:14px; color:#aaa;"></div>
-                        
-                        <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
-                            <label>Ruta de Envío (Destino: Pueblo Llano, Mérida):</label>
-                            <select id="shipping-method" style="background:#222; color:#fff; border:1px solid #444; padding:5px; border-radius:4px; outline:none;">
-                                <option value="15">Aéreo Express ($15/lb)</option>
-                                <option value="5">Marítimo ($5/lb)</option>
-                            </select>
-                        </div>
+            // --- SISTEMA DE TOASTS ---
+            window.showToast = function(message, type = 'success') {
+                const toast = document.createElement('div');
+                toast.className = `toast ${type}`;
+                const icon = type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-triangle' : 'fa-info-circle';
+                toast.innerHTML = `<i class="fas ${icon}"></i> <span>${message}</span>`;
+                document.getElementById('toast-container').appendChild(toast);
+                setTimeout(() => { if(toast.parentNode) toast.parentNode.removeChild(toast); }, 4000);
+            };
 
-                        <div style="display:flex; justify-content:space-between; margin-bottom:20px;">
-                            <label>Courier Nacional (Pre-alerta):</label>
-                            <select id="courier-method" style="background:#222; color:#fff; border:1px solid #444; padding:5px; border-radius:4px; outline:none;">
-                                <option value="MRW">MRW</option>
-                                <option value="Tealca">Tealca</option>
-                            </select>
-                        </div>
+            // --- API REAL DEL BCV ---
+            async function initSystem() {
+                try {
+                    // Consumiendo API pública confiable de DolarAPI Venezuela
+                    const response = await fetch('https://ve.dolarapi.com/v1/dolares/oficial');
+                    const data = await response.json();
+                    
+                    state.bcvRate = data.promedio;
+                    state.usdtRate = state.bcvRate * 1.02; // Simulación de % de cambio para USDT
+                    
+                    showToast('Enlace BCV establecido correctamente.', 'success');
+                } catch (error) {
+                    console.error("Fallo de API BCV. Usando tasa de respaldo.", error);
+                    state.bcvRate = 36.45; // Fallback Rate
+                    showToast('Servidor BCV inestable. Usando tasa de respaldo VExpress.', 'error');
+                }
 
-                        <div style="background:#000; padding:15px; border-radius:8px; margin-bottom:20px; border:1px solid #333;">
-                            <div style="display:flex; justify-content:space-between; margin-bottom:10px;"><span>Total USD:</span> <strong id="modal-total-usd">$0.00</strong></div>
-                            <div style="display:flex; justify-content:space-between; color:var(--neon-accent);"><span>Total VES (Tasa BCV):</span> <strong id="modal-total-bs">0.00 Bs</strong></div>
-                        </div>
+                updateTicker();
+                renderCatalog();
+            }
 
-                        <div style="display:flex; gap:10px;">
-                            <button onclick="processPayment('bs')" style="flex:1; background:#fff; color:#000; padding:12px; border:none; border-radius:6px; font-weight:bold; cursor:pointer;">Pago Móvil / Transferencia</button>
-                            <button onclick="processPayment('crypto')" style="flex:1; background:var(--neon-accent); color:#000; padding:12px; border:none; border-radius:6px; font-weight:bold; cursor:pointer;">Pagar con USDT / Apex</button>
-                        </div>
-                        <button onclick="closeCheckout()" style="width:100%; background:transparent; color:#888; border:none; padding:10px; margin-top:15px; cursor:pointer; font-weight:bold;">Cancelar Operación</button>
-                    </div>
-                </div>
-            `;
-            document.body.insertAdjacentHTML('beforeend', checkoutHTML);
-
-            // 4. RENDERIZADO DEL CATÁLOGO
-            const container = document.getElementById('catalog-container');
-            products.forEach((prod, index) => {
-                const priceBs = (prod.price * rates.bcv).toLocaleString('es-VE', {minimumFractionDigits: 2});
-                const el = document.createElement('article');
-                el.className = 'product-card';
-                el.style.transitionDelay = `${index * 0.1}s`;
-                el.innerHTML = `
-                    <div class="product-tag">${prod.tag}</div>
-                    <div class="product-img-wrapper"><img src="${prod.img}" alt="${prod.name}" style="width: 120px; filter: invert(1) opacity(0.8);"></div>
-                    <h3 class="product-title">${prod.name}</h3>
-                    <div class="product-price-usd">$${prod.price.toFixed(2)}</div>
-                    <div class="product-price-bs">≈ ${priceBs} Bs.</div>
-                    <button class="btn-premium" onclick="addToCart('${prod.id}', this)">Agregar al Sistema</button>
+            function updateTicker() {
+                document.getElementById('bcv-ticker').innerHTML = `
+                    <span class="ticker-item">TASA OFICIAL BCV: <span class="ticker-up">${state.bcvRate.toFixed(2)} VES/USD</span></span>
+                    <span class="ticker-item">USDT/VES (Estimado): <span class="ticker-up">${state.usdtRate.toFixed(2)}</span></span>
+                    <span class="ticker-item ticker-crypto"><i class="fab fa-bitcoin"></i> BTC: $${state.btcRate.toLocaleString()}</span>
+                    <span class="ticker-item">APEX LEVIATHAN NODE: <span class="ticker-up">ONLINE</span></span>
+                    <span class="ticker-item">RUTAS ACTIVAS: MIAMI -> VENEZUELA</span>
                 `;
-                container.appendChild(el);
-            });
+            }
 
-            // Animación de scroll y Glassmorphism dinámico
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); });
-            }, { threshold: 0.1 });
-            document.querySelectorAll('.product-card').forEach(card => observer.observe(card));
+            // --- RENDERIZADO DEL CATÁLOGO ---
+            function renderCatalog() {
+                const container = document.getElementById('catalog-container');
+                container.innerHTML = ''; // Limpiar skeletons
+                
+                products.forEach((prod, index) => {
+                    const priceBs = (prod.price * state.bcvRate).toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                    const el = document.createElement('article');
+                    el.className = 'product-card';
+                    el.style.transitionDelay = `${index * 0.1}s`;
+                    el.innerHTML = `
+                        <div class="product-tag">${prod.tag}</div>
+                        <div class="product-img-wrapper"><img src="${prod.img}" alt="${prod.name}" style="width: 120px; filter: invert(1) opacity(0.8);"></div>
+                        <h3 class="product-title">${prod.name}</h3>
+                        <div class="price-container">
+                            <div class="product-price-usd">$${prod.price.toFixed(2)}</div>
+                            <div class="product-price-bs">Referencia: ${priceBs} Bs.</div>
+                        </div>
+                        <button class="btn-premium" onclick="addToCart('${prod.id}', this)">Acoplar al Envío</button>
+                    `;
+                    container.appendChild(el);
+                });
 
+                // Intersection Observer para animación de scroll
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); });
+                }, { threshold: 0.1 });
+                document.querySelectorAll('.product-card').forEach(card => observer.observe(card));
+            }
+
+            // Efecto Glassmorphism en el Header
             window.addEventListener('scroll', () => {
                 const header = document.getElementById('main-header');
                 if(window.scrollY > 50) {
@@ -476,95 +445,163 @@
                 }
             });
 
-            // 5. LÓGICA BLINDADA DEL CARRITO
+            // --- LÓGICA DEL CARRITO AVANZADA ---
             window.addToCart = function(id, btnElement) {
                 const product = products.find(p => p.id === id);
-                cart.push(product);
-                document.getElementById('cart-counter').innerText = cart.length;
+                const existingItem = state.cart.find(item => item.id === id);
+
+                if (existingItem) {
+                    existingItem.qty += 1;
+                } else {
+                    state.cart.push({ ...product, qty: 1 });
+                }
                 
+                updateCartBadge();
+                showToast(`Agregado: ${product.name}`, 'success');
+
+                // Efecto visual botón
                 const originalText = btnElement.innerText;
-                btnElement.innerText = 'PROCESANDO...';
+                btnElement.innerText = 'EN CAJA FUERTE ✓';
                 btnElement.style.background = 'var(--text-primary)';
                 btnElement.style.color = '#000';
-                
                 setTimeout(() => {
-                    btnElement.innerText = 'EN CAJA FUERTE';
-                    setTimeout(() => {
-                        btnElement.innerText = originalText;
-                        btnElement.style.background = 'transparent';
-                        btnElement.style.color = 'var(--text-primary)';
-                    }, 1000);
-                }, 500);
+                    btnElement.innerText = originalText;
+                    btnElement.style.background = 'transparent';
+                    btnElement.style.color = 'var(--text-primary)';
+                }, 1500);
             };
 
-            // Apertura del Checkout
-            document.getElementById('cart-trigger-btn').onclick = openCheckout;
+            function updateCartBadge() {
+                const totalItems = state.cart.reduce((sum, item) => sum + item.qty, 0);
+                document.getElementById('cart-counter').innerText = totalItems;
+            }
 
-            function openCheckout() {
-                if(cart.length === 0) return alert("El dock está vacío. Seleccione un equipo del catálogo primero.");
-                
-                let html = '';
+            window.changeQty = function(id, delta) {
+                const item = state.cart.find(i => i.id === id);
+                if (item) {
+                    item.qty += delta;
+                    if (item.qty <= 0) {
+                        state.cart = state.cart.filter(i => i.id !== id);
+                    }
+                    updateCartBadge();
+                    renderCheckoutCart();
+                }
+            };
+
+            // --- APERTURA Y MANEJO DEL CHECKOUT ---
+            const modal = document.getElementById('checkout-modal');
+            
+            document.getElementById('cart-trigger-btn').addEventListener('click', () => {
+                if(state.cart.length === 0) {
+                    showToast("El dock de envío está vacío. Seleccione equipos primero.", 'error');
+                    return;
+                }
+                renderCheckoutCart();
+                modal.classList.add('active');
+            });
+
+            document.getElementById('close-modal-btn').addEventListener('click', () => {
+                modal.classList.remove('active');
+            });
+
+            function renderCheckoutCart() {
+                const list = document.getElementById('cart-items-list');
+                list.innerHTML = '';
                 let subtotal = 0;
-                cart.forEach(item => {
-                    html += `<div style="display:flex; justify-content:space-between; border-bottom:1px solid #333; padding:8px 0;"><span>${item.name}</span><span style="color:var(--neon-accent); font-weight:bold;">$${item.price.toFixed(2)}</span></div>`;
-                    subtotal += item.price;
-                });
-                
-                document.getElementById('cart-items-list').innerHTML = html;
-                updateTotals(subtotal);
-                
-                document.getElementById('shipping-method').onchange = () => updateTotals(subtotal);
-                document.getElementById('checkout-modal').style.display = 'flex';
-            }
 
-            function updateTotals(subtotal) {
-                const shippingCost = parseFloat(document.getElementById('shipping-method').value);
-                const totalUSD = subtotal + shippingCost;
-                const totalBS = totalUSD * rates.bcv;
-                
-                document.getElementById('modal-total-usd').innerText = `$${totalUSD.toFixed(2)}`;
-                document.getElementById('modal-total-bs').innerText = `${totalBS.toLocaleString('es-VE', {minimumFractionDigits: 2})} Bs`;
-            }
+                if(state.cart.length === 0) {
+                    modal.classList.remove('active');
+                    return;
+                }
 
-            window.closeCheckout = function() {
-                document.getElementById('checkout-modal').style.display = 'none';
-            };
-
-            // 6. PROTOCOLO DE PAGO Y CONEXIÓN TELEGRAM BOTFATHER
-            window.processPayment = function(method) {
-                const btnText = method === 'crypto' ? 'CONECTANDO CON APEX LEVIATHAN...' : 'VERIFICANDO PAGO MÓVIL...';
-                document.getElementById('checkout-modal').innerHTML = `
-                    <div style="text-align:center; color:#fff;">
-                        <i class="fas fa-circle-notch fa-spin" style="font-size:40px; color:var(--neon-accent); margin-bottom:20px;"></i>
-                        <h3>${btnText}</h3>
-                        <p style="color:#666; margin-top:10px;">Enviando pre-alerta logística...</p>
-                    </div>
-                `;
-
-                // Aquí va la conexión con BotFather para Telegram (Descomentar y agregar Token cuando estés listo)
-                /* fetch('https://api.telegram.org/bot<TU_TOKEN_AQUI>/sendMessage', {
-                      method: 'POST',
-                      headers: {'Content-Type': 'application/json'},
-                      body: JSON.stringify({
-                          chat_id: '<TU_CHAT_ID>',
-                          text: '🚨 NUEVA COMPRA EN VEXPRESS\\nMonto: ' + document.getElementById('modal-total-usd').innerText
-                      })
-                  });
-                */
-
-                setTimeout(() => {
-                    document.getElementById('checkout-modal').innerHTML = `
-                        <div style="text-align:center; color:#fff; background:#111; padding:40px; border-radius:12px; border:1px solid #00ff88; box-shadow: 0 0 30px rgba(0,255,136,0.2);">
-                            <i class="fas fa-check-circle" style="font-size:50px; color:#00ff88; margin-bottom:20px;"></i>
-                            <h2>OPERACIÓN EXITOSA</h2>
-                            <p style="color:#aaa; margin-top:10px;">La mercancía entrará en tránsito. Te contactaremos para la guía nacional.</p>
-                            <button onclick="location.reload()" style="background:#fff; color:#000; padding:12px 25px; border:none; border-radius:6px; margin-top:25px; font-weight:bold; cursor:pointer;">Cerrar Terminal</button>
+                state.cart.forEach(item => {
+                    const itemTotal = item.price * item.qty;
+                    subtotal += itemTotal;
+                    list.innerHTML += `
+                        <div class="cart-item">
+                            <div style="flex:1;">
+                                <div style="font-weight:600; color:#fff;">${item.name}</div>
+                                <div style="color:var(--text-secondary); font-size:12px;">$${item.price.toFixed(2)} c/u</div>
+                            </div>
+                            <div class="item-controls">
+                                <button class="qty-btn" onclick="changeQty('${item.id}', -1)">-</button>
+                                <span style="width:20px; text-align:center;">${item.qty}</span>
+                                <button class="qty-btn" onclick="changeQty('${item.id}', 1)">+</button>
+                            </div>
+                            <div style="width:70px; text-align:right; color:var(--neon-accent); font-weight:bold;">
+                                $${itemTotal.toFixed(2)}
+                            </div>
                         </div>
                     `;
-                    cart = [];
-                    document.getElementById('cart-counter').innerText = 0;
-                }, 3000);
+                });
+
+                const totalBS = subtotal * state.bcvRate;
+                
+                document.getElementById('modal-subtotal').innerText = `$${subtotal.toFixed(2)}`;
+                document.getElementById('modal-total-usd').innerText = `$${subtotal.toFixed(2)}`;
+                document.getElementById('modal-total-bs').innerText = `${totalBS.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits:2})} Bs (Tasa BCV: ${state.bcvRate})`;
+            }
+
+            // --- GENERADOR DE API WHATSAPP (EL CIERRE DE VENTA) ---
+            window.processWhatsAppOrder = function(paymentMethod) {
+                // Validación del formulario
+                const name = document.getElementById('c-name').value;
+                const idCard = document.getElementById('c-id').value;
+                const phone = document.getElementById('c-phone').value;
+                const address = document.getElementById('c-address').value;
+                const shipping = document.getElementById('shipping-method').options[document.getElementById('shipping-method').selectedIndex].text;
+                const courier = document.getElementById('courier-method').value;
+
+                if(!name || !idCard || !phone || !address) {
+                    showToast("Requerimos todos los datos logísticos para procesar.", "error");
+                    return;
+                }
+
+                // Construcción del Mensaje
+                let subtotal = state.cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+                let totalBS = (subtotal * state.bcvRate).toLocaleString('es-VE', {minimumFractionDigits: 2});
+
+                let msg = `*🚀 NUEVA ORDEN VEXPRESS (VISSIONARY GROUP)*\n\n`;
+                msg += `*DATOS DEL CLIENTE:*\n`;
+                msg += `👤 Nombre: ${name}\n`;
+                msg += `🪪 C.I/RIF: ${idCard}\n`;
+                msg += `📱 Teléfono: ${phone}\n`;
+                msg += `📍 Destino: ${address}\n\n`;
+                
+                msg += `*📦 MANIFIESTO DE EQUIPOS:*\n`;
+                state.cart.forEach(item => {
+                    msg += `▫️ ${item.qty}x ${item.name} ($${(item.price * item.qty).toFixed(2)})\n`;
+                });
+
+                msg += `\n*✈️ LOGÍSTICA SOLICITADA:*\n`;
+                msg += `Vía: ${shipping}\n`;
+                msg += `Courier Nacional: ${courier}\n\n`;
+
+                msg += `*💰 TOTALIZACIÓN:*\n`;
+                msg += `💵 USD: $${subtotal.toFixed(2)} (Sin peso de envío)\n`;
+                msg += `🇻🇪 VES: Bs. ${totalBS} (Tasa BCV: ${state.bcvRate})\n`;
+                msg += `💳 Método a usar: ${paymentMethod}\n\n`;
+                
+                msg += `_Espero datos para realizar el pago._`;
+
+                // Codificar URL y redireccionar
+                const encodedMsg = encodeURIComponent(msg);
+                const waURL = `https://wa.me/${state.phoneOwner}?text=${encodedMsg}`;
+                
+                showToast("Encriptando orden y abriendo terminal seguro...", "success");
+                
+                setTimeout(() => {
+                    window.open(waURL, '_blank');
+                    // Resetear carrito después de enviar
+                    state.cart = [];
+                    updateCartBadge();
+                    modal.classList.remove('active');
+                }, 1500);
             };
 
+            // Iniciar el sistema
+            initSystem();
         });
     </script>
+</body>
+</html>
